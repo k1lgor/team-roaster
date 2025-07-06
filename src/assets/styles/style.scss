@@ -1,0 +1,144 @@
+/* Import futuristic fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --dark-bg: #0a0f1e;
+  --primary-neon: #00f6ff; /* Cyan */
+  --secondary-neon: #ff00ff; /* Magenta */
+  --accent-neon: #7dff00; /* Lime Green */
+  --text-color: #e0e0e0;
+  --border-color: rgba(0, 246, 255, 0.5);
+  --card-bg: rgba(10, 30, 60, 0.5);
+  --card-shadow: 0 0 15px var(--primary-neon), 0 0 25px var(--secondary-neon);
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  /* Add a subtle grid background */
+  background-image: linear-gradient(
+      rgba(0, 246, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 246, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Use futuristic fonts */
+.font-name {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--primary-neon);
+  text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon);
+}
+
+.font-title {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--accent-neon);
+  text-shadow: 0 0 3px var(--accent-neon);
+}
+
+/* Angular, hexagonal profile pictures */
+.user-pic {
+  width: 150px;
+  height: 150px;
+  margin: 20px auto 20px;
+  overflow: hidden;
+  /* Hexagonal shape using clip-path */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: 2px solid var(--border-color);
+  transition: transform 0.5s ease-in-out, border-color 0.5s;
+}
+
+/* Geometric card design */
+.card-box {
+  padding: 20px;
+  margin: 20px 0px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  /* Remove border-radius for sharp corners */
+  border-radius: 0;
+  box-shadow: 0 0 5px rgba(0, 246, 255, 0.3);
+  transition: box-shadow 0.5s, transform 0.5s;
+  backdrop-filter: blur(3px); /* Frosted glass effect */
+}
+
+/* --- HOVER & ANIMATION EFFECTS --- */
+
+.card-box:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--card-shadow);
+  border-color: var(--primary-neon);
+
+  .user-pic {
+    transform: rotate(360deg) scale(1.1);
+    border-color: var(--secondary-neon);
+  }
+
+  /* Intensify glitch effect on name */
+  .stack h4 {
+    animation: stack 90ms cubic-bezier(0.46, 0.29, 0, 1.24) 1 backwards
+        calc(var(--index) * 90ms),
+      glitch 0.3s ease-in-out infinite alternate;
+  }
+}
+
+.stack {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.stack h2,
+.stack h4 {
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+
+/* Apply the clipping effect ONLY to the main title stack */
+.stack h2 {
+  --stack-height: calc(100% / var(--stacks, 3) - 1px);
+  --inverse-index: calc(calc(var(--stacks, 3) - 1) - var(--index));
+  --clip-top: calc(var(--stack-height) * var(--index));
+  --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+  clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+}
+
+/* Main heading glitch effect */
+.stack h2 {
+  animation: glitch 1.5s ease infinite alternate-reverse;
+}
+
+/* Enhanced Glitch Keyframes */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--secondary-neon);
+  }
+  25% {
+    transform: translate(5px, 3px) skewX(-5deg);
+    text-shadow: 0 0 10px var(--secondary-neon), 0 0 15px var(--primary-neon);
+  }
+  50% {
+    transform: translate(-5px, -3px) skewX(5deg);
+  }
+  75% {
+    transform: translate(3px, -2px) skewX(-3deg);
+    text-shadow: 0 0 12px var(--primary-neon), 0 0 18px var(--secondary-neon);
+  }
+  100% {
+    transform: translate(0);
+    text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--secondary-neon);
+  }
+}
+
+/* Stack animation (can remain similar) */
+@keyframes stack {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
