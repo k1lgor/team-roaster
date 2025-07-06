@@ -72,7 +72,7 @@ In the project directory, you can run:
 
 Adding, removing, or editing team members is straightforward:
 
-1. Open the file `src/components/KvnTeam.vue`.
+1. Open the file `src/components/TeamRoaster.vue`.
 2. Locate the `teamMembers` array within the `<script setup>` block.
 3. Modify the array of objects. Each object represents a team member and has the following structure:
 
